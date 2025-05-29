@@ -1,0 +1,182 @@
+[
+  {
+    "titulo": "Auriculares Inalámbricos X100",
+    "foto": "https://example.com/images/x100.jpg",
+    "descripcion": "Auriculares Bluetooth con cancelación de ruido y batería de larga duración.",
+    "sitio_web_fabricante": "https://fabricante-audio.com/x100",
+    "comentarios": [
+      {
+        "usuario": "LucasM",
+        "comentario": "Excelente calidad de sonido y muy cómodos.",
+        "valoracion": 5
+      },
+      {
+        "usuario": "Ana23",
+        "comentario": "Buena batería pero se sienten frágiles.",
+        "valoracion": 3
+      }
+    ]
+  },
+  {
+    "titulo": "Smartwatch FitPro",
+    "foto": "https://example.com/images/fitpro.jpg",
+    "descripcion": "Reloj inteligente con monitor de frecuencia cardíaca y GPS.",
+    "sitio_web_fabricante": "https://fittech.com/fitpro",
+    "comentarios": [
+      {
+        "usuario": "CarlosR",
+        "comentario": "Perfecto para entrenar y controlar la salud.",
+        "valoracion": 4
+      },
+      {
+        "usuario": "Meli89",
+        "comentario": "La app a veces falla pero el reloj es excelente.",
+        "valoracion": 4
+      }
+    ]
+  },
+  {
+    "titulo": "Notebook UltraSlim 14",
+    "foto": "https://example.com/images/ultraslim14.jpg",
+    "descripcion": "Portátil ultradelgada con procesador Intel i7 y pantalla Full HD.",
+    "sitio_web_fabricante": "https://notebooksplus.com/ultraslim14",
+    "comentarios": [
+      {
+        "usuario": "JuanT",
+        "comentario": "Rápida y liviana. Ideal para trabajo remoto.",
+        "valoracion": 5
+      },
+      {
+        "usuario": "SofiK",
+        "comentario": "Buen rendimiento pero se calienta bastante.",
+        "valoracion": 3
+      }
+    ]
+  },
+  {
+    "titulo": "Cámara Deportiva ActionCam 4K",
+    "foto": "https://example.com/images/actioncam4k.jpg",
+    "descripcion": "Captura videos en 4K, resistente al agua hasta 30 metros.",
+    "sitio_web_fabricante": "https://extremecam.com/actioncam4k",
+    "comentarios": [
+      {
+        "usuario": "NicoA",
+        "comentario": "Ideal para viajes y deportes extremos.",
+        "valoracion": 5
+      },
+      {
+        "usuario": "Vale25",
+        "comentario": "La batería podría durar más.",
+        "valoracion": 4
+      }
+    ]
+  },
+  {
+    "titulo": "Robot Aspiradora CleanBot 300",
+    "foto": "https://example.com/images/cleanbot300.jpg",
+    "descripcion": "Aspiradora robot inteligente con mapeo de habitaciones.",
+    "sitio_web_fabricante": "https://cleantech.com/cleanbot300",
+    "comentarios": [
+      {
+        "usuario": "MarceL",
+        "comentario": "Deja todo impecable. Muy útil.",
+        "valoracion": 5
+      },
+      {
+        "usuario": "RomiG",
+        "comentario": "A veces se queda trabado con alfombras.",
+        "valoracion": 3
+      }
+    ]
+  },
+  {
+    "titulo": "Monitor Curvo Gaming 32\"",
+    "foto": "https://example.com/images/curvo32.jpg",
+    "descripcion": "Monitor curvo con tasa de refresco de 144Hz y resolución QHD.",
+    "sitio_web_fabricante": "https://gamergear.com/curvo32",
+    "comentarios": [
+      {
+        "usuario": "GonzaYT",
+        "comentario": "Espectacular para jugar shooters.",
+        "valoracion": 5
+      },
+      {
+        "usuario": "LeoP",
+        "comentario": "Los colores podrían ser más vibrantes.",
+        "valoracion": 4
+      }
+    ]
+  },
+  {
+    "titulo": "Teclado Mecánico RGB MK900",
+    "foto": "https://example.com/images/mk900.jpg",
+    "descripcion": "Teclado con switches rojos y retroiluminación RGB.",
+    "sitio_web_fabricante": "https://keytech.com/mk900",
+    "comentarios": [
+      {
+        "usuario": "FedeH",
+        "comentario": "Muy buena respuesta y diseño atractivo.",
+        "valoracion": 5
+      },
+      {
+        "usuario": "Cami22",
+        "comentario": "Es algo ruidoso, pero se siente pro.",
+        "valoracion": 4
+      }
+    ]
+  },
+  {
+    "titulo": "Cafetera Espresso ProBarista",
+    "foto": "https://example.com/images/probarista.jpg",
+    "descripcion": "Cafetera profesional para espresso y capuccino.",
+    "sitio_web_fabricante": "https://cafeelite.com/probarista",
+    "comentarios": [
+      {
+        "usuario": "SantiZ",
+        "comentario": "Hace un café increíble en minutos.",
+        "valoracion": 5
+      },
+      {
+        "usuario": "LucreP",
+        "comentario": "Un poco complicada de limpiar.",
+        "valoracion": 3
+      }
+    ]
+  },
+  {
+    "titulo": "Tablet EDU10 Kids",
+    "foto": "https://example.com/images/edu10.jpg",
+    "descripcion": "Tablet resistente diseñada para niños con apps educativas preinstaladas.",
+    "sitio_web_fabricante": "https://edutech.com/edu10",
+    "comentarios": [
+      {
+        "usuario": "PabloF",
+        "comentario": "Mis hijos la usan todos los días. Excelente.",
+        "valoracion": 5
+      },
+      {
+        "usuario": "ClaraR",
+        "comentario": "Se tilda a veces, pero cumple su función.",
+        "valoracion": 4
+      }
+    ]
+  },
+  {
+    "titulo": "Silla Ergonómica OfficeComfort",
+    "foto": "https://example.com/images/officecomfort.jpg",
+    "descripcion": "Silla de oficina ergonómica con soporte lumbar ajustable.",
+    "sitio_web_fabricante": "https://ergofurniture.com/officecomfort",
+    "comentarios": [
+      {
+        "usuario": "MartuL",
+        "comentario": "Desde que la uso no tengo dolores de espalda.",
+        "valoracion": 5
+      },
+      {
+        "usuario": "TomiW",
+        "comentario": "Muy cómoda, pero difícil de armar.",
+        "valoracion": 4
+      }
+    ]
+  }
+]
