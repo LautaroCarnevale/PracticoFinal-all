@@ -1,10 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <links
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        rel="stylesheet">
+        <title>Comprar - CryptoTracker</title>
+        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
+
 <body>
     <header class="p-4 border-b border-gray-300 flex justify-center">
         <div class="flex justify-between w-4/5">
@@ -13,13 +19,44 @@
             </div>
             <nav>
                 <ul class="flex justify-between gap-4 text-lg">
-                    <li class="font-semibold"><a href="/Index.html.html">Portafolio</a></li>
-                    <li><a href="/comprar.html">Comprar</a></li>
+                    <li><a href="/Index.html">Portafolio</a></li>
+                    <li class="font-semibold"><a href="/comprar.html">Comprar</a></li>
                     <li><a href="/vender.html">Vender</a></li>
                     <li><a href="/transacciones.html">Transacciones</a></li>
                 </ul>
             </nav>
         </div>
     </header>
+    <main>
+        <section class="mt-15">
+            <div class="w-9/12 mx-auto">
+                <h1 class="text-3xl font-semibold">Comprar</h1>
+                <p class="text-gray-500"> Aquí puedes comprar criptomonedas.</p>
+            </div>
+        </section>
+        <section class="mt-9">
+            <div>
+                <form id="form-comprar" class="w-9/12 mx-auto">
+                    <div class="mb-4">
+                        <label for="criptomoneda"
+                            class="block text-gray-700 text-sm font-bold mb-2">Criptomoneda:</label>
+                        <select id="criptomoneda" name="criptomoneda"
+                            class="w-full border border-gray-300 rounded py-2 px-3">
+                        </select>
+                    </div>
+                    <div class="mb-4">
+                        <label for="cantidad" class="block text-gray-700 text-sm font-bold mb-2">Cantidad:</label>
+                        <input type="number" id="cantidad" name="cantidad"
+                            class="w-full border border-gray-300 rounded py-2 px-3">
+                    </div>
+                    <button type="submit"
+                        class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded">Comprar</button>
+                </form>
+            </div>
+        </section>
+    </main>
+    <script type="module" src="/js/main.js"></script>
+
 </body>
+
 </html>
