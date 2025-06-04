@@ -1,5 +1,5 @@
-
-async function fetchTransactions() {
+// Función para obtener las transacciones
+async function fetchGryptos() {
     try {
         const response = await fetch("http://localhost:5119/api/Crypto/GetCryptos", {
             method: "GET",
@@ -15,24 +15,25 @@ async function fetchTransactions() {
         return null;
     }
 }
+// Función para obtener las transacciones
+async function fetchTransactions() {
+    try {
+        const response = await fetch("http://localhost:5119/api/transactions/GetTransactions", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            }
+        });
 
-// async function fetchTransactions() {
-//     try {
-//         const response = await fetch("http://localhost:7096/api/Crypto/GetCryptos", {
-//             method: "GET",
-//             headers: {
-//                 "Content-Type": "application/json",
-//             }
-//         });
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Fetch error:', error);
+        return null;
+    }
+}
 
-//         const data = await response.json();
-//         return data;
-//     } catch (error) {
-//         console.error('Fetch error:', error);
-//         return null;
-//     }
-// }
-
+// Función para obtener las monedas
 async function fetchMonedas() {
     try {
         const response = await fetch("http://localhost:5119/api/Crypto/GetMonedas", {
@@ -50,7 +51,7 @@ async function fetchMonedas() {
     }
 }
 
-
+// Función para crear un usuario
 async function fetchCreateUser(user) {
     const userEnviar = {
         Nombre: user.nombre,
@@ -81,7 +82,7 @@ async function fetchCreateUser(user) {
 }
 
 
-
+// Función para verificar un usuario
 async function fetchVerifyUser(user) {
     try {
         const response = await fetch("http://localhost:5119/api/users/VerifyUser", {
@@ -102,4 +103,4 @@ async function fetchVerifyUser(user) {
     }
 }
 
-export { fetchTransactions, fetchMonedas, fetchCreateUser, fetchVerifyUser };
+export { fetchGryptos, fetchTransactions, fetchMonedas, fetchCreateUser, fetchVerifyUser };

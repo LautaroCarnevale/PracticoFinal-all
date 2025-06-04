@@ -1,10 +1,10 @@
-import { fetchTransactions, fetchCreateUser } from './fetchs.js';
+import { fetchGryptos, fetchCreateUser } from './fetchs.js';
 import { crearFila } from './componentes/crearFila.js';
 
 const $$ = el => document.getElementById(el);
 
 async function cargarMyCryptos() {
-    const data = await fetchTransactions();
+    const data = await fetchGryptos();
     if (data === null) {
         const fila = document.createElement('tr');
         const td = document.createElement('td');
@@ -17,12 +17,12 @@ async function cargarMyCryptos() {
     }
 
     for (const transaccion of data) {
-        const tr = crearFila([transaccion.nombre, transaccion.totalCrypto, transaccion.totalCrypto, transaccion.totalPesos.totalBid], "border border-b border-gray-300");
+        const tr = crearFila([transaccion.nombre, transaccion.totalCrypto, transaccion.totalPesos.totalBid], "border border-b border-gray-300");
         $$('tbody-portafolio').appendChild(tr);
     }
 }
 
-
+// Función para crear un modal de registro de usuario
 function modalCrearUsuario() {
     const userLocal = localStorage.getItem('user');
 
@@ -43,7 +43,11 @@ function modalCrearUsuario() {
         try {
             const data = await fetchCreateUser(user);
 
-            localStorage.setItem('user', JSON.stringify(data));
+            localStorage.setItem('user', JSON.stringify({
+                id: data.id,
+                nombre: data.nombre,
+                apellido: data.apellido,
+            }));
 
             $$('modal').classList.add('hidden');
             $$('modal-registro').classList.add('hidden');
