@@ -81,6 +81,36 @@ async function fetchCreateUser(user) {
     }
 }
 
+async function fetchCreateTransaction(transaction) {
+    const transactionModel = {
+        Cantidad: transaction.cantidad,
+        IdMoneda: transaction.moneda,
+        UserId: transaction.userId,
+        Fecha: transaction.fecha
+    };
+
+    try {
+        const response = await fetch("http://localhost:5119/api/transactions/CreateTransaction", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(transactionModel)
+        });
+
+        if (!response.ok) {
+            throw new Error("Error al guardar la transacción");
+        }
+
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error("Error:", error);
+        throw error;
+    }
+}
+
+
 
 // Función para verificar un usuario
 async function fetchVerifyUser(user) {
@@ -103,4 +133,4 @@ async function fetchVerifyUser(user) {
     }
 }
 
-export { fetchGryptos, fetchTransactions, fetchMonedas, fetchCreateUser, fetchVerifyUser };
+export { fetchGryptos, fetchTransactions, fetchMonedas, fetchCreateUser, fetchVerifyUser, fetchCreateTransaction };
