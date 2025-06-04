@@ -1,19 +1,16 @@
-const crearFila = (transaccion, className) => {
-    const fila = document.createElement('tr');
-    fila.classList.add("border-b", "border-gray-300", "h-15");
+import { fetchMonedas } from "./fetchs.js";
+const $$ = el => document.getElementById(el);
 
-    transaccion.forEach((element, index) => {
-        const td = document.createElement('td');
-        td.textContent = element;
-
-        td.classList.add("py-2", "text-sm", "text-gray-700");
-        if (index === 0) td.classList.add("pl-4", "font-semibold");
-
-        fila.appendChild(td);
-    });
-
-
-    return fila;
+async function cargarMonedas() {
+    const data = await fetchMonedas();
+    if (data === null) return;
+    for (const moneda of data) {
+        const option = document.createElement('option');
+        option.value = moneda.id;
+        option.textContent = moneda.nombre + " (" + moneda.abreviatura + ")";
+        $$('criptomoneda').appendChild(option);
+    }
 }
 
-export { crearFila };
+
+cargarMonedas();

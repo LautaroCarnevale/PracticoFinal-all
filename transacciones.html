@@ -1,15 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-       <links
+    <links
         href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
         rel="stylesheet">
         <title>Transacciones - CryptoTracker</title>
         <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
+
 <body>
-    <h1>Transacciones</h1>
+    <header class="p-4 border-b border-gray-300 flex justify-center">
+        <div class="flex justify-between w-4/5">
+            <div>
+                <p class="text-xl font-semibold">CryptoTracker</p>
+            </div>
+            <nav>
+                <ul class="flex justify-between gap-4 text-lg">
+                    <li><a href="/index.html">Portafolio</a></li>
+                    <li><a href="/comprar.html">Comprar</a></li>
+                    <li><a href="/vender.html">Vender</a></li>
+                    <li class="font-semibold"><a href="/transacciones.html">Transacciones</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <section class="mt-15">
+            <div class="w-9/12 mx-auto">
+                <h1 class="text-3xl font-semibold">Transacciones</h1>
+                <p class="text-gray-500">Aquí puedes ver tus transacciones.</p>
+            </div>
+        </section>
+        <section class="mt-9">
+            <div class="w-9/12 border-t border-x mx-auto border-gray-300 rounded border-separate border-spacing-0">
+                <table class="w-full text-left">
+                    <thead class="h-12 border-b border-gray-300">
+                        <tr class="font-semibold">
+                            <th class="pl-4 font-normal">Moneda</th>
+                            <th class="font-normal">Cantidad</th>
+                            <th class="font-normal">Estado</th>
+                            <th class="font-normal">Fecha</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody-transacciones"></tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+    <script type="module" src="/js/transacciones.js" ></script>
 </body>
+
 </html>
