@@ -19,7 +19,7 @@ async function cargarMyTransactions() {
 
         const estado = transaccion.cantidad > 0 ? "Compra" : "Venta";
 
-        const tr = crearFila([transaccion.moneda.nombre, transaccion.cantidad, estado, transaccion.fecha], "border border-b border-gray-300");
+        const tr = crearFila([transaccion.moneda.nombre, transaccion.cantidad, estado, transaccion.fecha]);
         $$('tbody-transacciones').appendChild(tr);
     }
 }

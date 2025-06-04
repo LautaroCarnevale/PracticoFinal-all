@@ -1,8 +1,10 @@
-const crearFila = (transaccion, className) => {
+const crearFila = (elementos) => {
     const fila = document.createElement('tr');
     fila.classList.add("border-b", "border-gray-300", "h-15");
 
-    transaccion.forEach((element, index) => {
+    //  Crear celdas para cada elemento de los elementos
+    //  y agregar clases de estilos
+    elementos.forEach((element, index) => {
         const td = document.createElement('td');
         const span = document.createElement('span');
 
