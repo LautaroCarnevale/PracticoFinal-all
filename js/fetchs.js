@@ -81,10 +81,11 @@ async function fetchCreateUser(user) {
     }
 }
 
+// Función para crear una transacción (venta o compra)
 async function fetchCreateTransaction(transaction) {
     const transactionModel = {
         Cantidad: transaction.cantidad,
-        IdMoneda: transaction.moneda,
+        MonedaId: parseInt(transaction.moneda),
         UserId: transaction.userId,
         Fecha: transaction.fecha
     };
