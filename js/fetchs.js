@@ -102,6 +102,7 @@ async function fetchCreateUser(user) {
 
 // Función para crear una transacción (venta o compra)
 async function fetchCreateTransaction(transaction) {
+
     const transactionModel = {
         Cantidad: transaction.cantidad,
         MonedaId: parseInt(transaction.moneda),
@@ -118,10 +119,10 @@ async function fetchCreateTransaction(transaction) {
             body: JSON.stringify(transactionModel)
         });
 
-        if (!response.ok) {
-            throw new Error("Error al guardar la transacción");
+       if (!response.ok) {
+            const errorMessage = await response.text();
+            throw new Error(errorMessage);
         }
-
         const data = await response.json();
         return data;
     } catch (error) {

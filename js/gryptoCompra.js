@@ -1,5 +1,5 @@
 import { cargarMonedas } from "./componentes/cargarMonedas.js";
-import { fetchCreateTransaction, fetchMonedas } from "./fetchs.js";
+import { fetchCreateTransaction } from "./fetchs.js";
 
 const $$ = el => document.getElementById(el);
 

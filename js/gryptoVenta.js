@@ -25,7 +25,7 @@ function generarUnaTransaccion() {
         }
 
         try {
-            fetchCreateTransaction({ cantidad: -cantidadVenta, moneda, fecha: fechaActual, userId: 1 });
+           fetchCreateTransaction({ cantidad: -cantidadVenta, moneda, fecha: fechaActual, userId: 1 });            
         } catch (error) {
             alert(error.message);
         }
