@@ -1,4 +1,4 @@
-import { fetchGryptos, fetchCreateUser } from './fetchs.js';
+import { fetchGryptos, fetchCreateUser, fetchGetCryptosPrice } from './fetchs.js';
 import { crearFila } from './componentes/crearFila.js';
 
 const $$ = el => document.getElementById(el);
@@ -17,7 +17,25 @@ async function cargarMyCryptos() {
     }
 
     for (const transaccion of data) {
-        const tr = crearFila([transaccion.nombre, transaccion.totalCrypto, transaccion.totalPesos.totalBid], "border border-b border-gray-300");
+        let totalEnPesos;
+        if (transaccion.totalCrypto > 0) {
+            const precioActual = await fetchGetCryptosPrice(transaccion.abreviatura);
+            totalEnPesos = precioActual ? (precioActual * transaccion.totalCrypto).toFixed(2) : 0;
+        }
+
+        const totalCryptoFormateado = transaccion.totalCrypto.toLocaleString('es-AR');
+        const totalPesosFormateado = totalEnPesos
+            ? Number(totalEnPesos).toLocaleString('es-AR', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+            })
+            : '0,00';
+
+        const tr = crearFila([
+            transaccion.nombre,
+            totalCryptoFormateado,
+            `$${totalPesosFormateado}`,
+        ]);
         $$('tbody-portafolio').appendChild(tr);
     }
 }

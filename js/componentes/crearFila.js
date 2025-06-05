@@ -1,6 +1,6 @@
 const crearFila = (elementos) => {
     const fila = document.createElement('tr');
-    fila.classList.add("border-b", "border-gray-300", "h-15");
+    fila.classList.add("border-b", "border-gray-300", "h-15", "odd:bg-white", "even:bg-[rgba(220,252,231,0.8)]");
 
     //  Crear celdas para cada elemento de los elementos
     //  y agregar clases de estilos

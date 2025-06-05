@@ -15,6 +15,25 @@ async function fetchGryptos() {
         return null;
     }
 }
+
+async function fetchGetCryptosPrice(abreviatura) {
+    try {
+        const url = `https://criptoya.com/api/binance/${abreviatura}/ARS/1`;
+        const response = await fetch(url, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            }
+        });
+
+        const data = await response.json();
+        return data.totalBid;
+    } catch (error) {
+        console.error('Fetch error:', error);
+        return null;
+    }
+}
+
 // Función para obtener las transacciones
 async function fetchTransactions() {
     try {
@@ -111,8 +130,6 @@ async function fetchCreateTransaction(transaction) {
     }
 }
 
-
-
 // Función para verificar un usuario
 async function fetchVerifyUser(user) {
     try {
@@ -134,4 +151,4 @@ async function fetchVerifyUser(user) {
     }
 }
 
-export { fetchGryptos, fetchTransactions, fetchMonedas, fetchCreateUser, fetchVerifyUser, fetchCreateTransaction };
+export { fetchGryptos, fetchTransactions, fetchMonedas, fetchCreateUser, fetchVerifyUser, fetchCreateTransaction, fetchGetCryptosPrice };
