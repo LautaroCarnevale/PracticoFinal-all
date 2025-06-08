@@ -13,7 +13,7 @@ function generarUnaTransaccion() {
         const cantidad = parseFloat($$('cantidad').value);
         const moneda = $$('criptomoneda').value;
 
-        if (isNaN(cantidad)) {
+        if (isNaN(cantidad) || cantidad <= 0) {
             Toastify({
                 text: "Por favor, ingresa una cantidad válida.",
                 duration: 3000,

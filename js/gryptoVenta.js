@@ -41,16 +41,31 @@ function generarUnaTransaccion() {
         }
 
         try {
-            const res = await fetchCreateTransaction({ cantidad: -cantidadVenta, moneda, fecha: fechaActual, userId: 1 });
-            Toastify({
-                text: "Transacción de venta realizada con éxito",
-                duration: 3000,
-                gravity: "top",
-                position: "right",
-                style: {
-                    background: "#4CAF50",
-                }
-            }).showToast();
+            swal({
+                title: " ¿Estás seguro de que quieres vender?",
+                text: `Esta acción no se puede deshacer.`,
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+                .then(async (willDelete) => {
+                    if (willDelete) {
+                        const res = await fetchCreateTransaction({ cantidad: -cantidadVenta, moneda, fecha: fechaActual, userId: 1 });
+                        Toastify({
+                            text: "Transacción de venta realizada con éxito",
+                            duration: 3000,
+                            gravity: "top",
+                            position: "right",
+                            style: {
+                                background: "#4CAF50",
+                            }
+                        }).showToast();
+                    } else {
+                        swal("Tu transacción ha sido cancelada");
+                    }
+                });
+
+
         } catch (error) {
             Toastify({
                 text: error.message,
