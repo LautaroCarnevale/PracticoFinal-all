@@ -5,10 +5,37 @@ const $$ = el => document.getElementById(el);
 
 // generar una transacción de compra o venta
 function generarUnaTransaccion() {
-    const fechaActual = new Date();
+
+    const calcularMontoCompra = async () => {
+        const moneda = $$('criptomoneda').value;
+        const cantidad = parseFloat($$('cantidad-compra').value);
+
+        if (!moneda || isNaN(cantidad)) {
+            $$('monto-compra').textContent = '0.00000000';
+            return;
+        }
+
+        $$('modal-estimacion').classList.remove('hidden');
+
+        const monedaData = monedas.find(m => m.id == moneda);
+        if (!monedaData) return;
+
+        const priceMonedaSelected = await fetchGetCryptosPrice(monedaData.abreviatura);
+        const monto = cantidad * priceMonedaSelected;
+
+        $$('monto-compra').textContent = formatearPrecioEnPesos(monto);
+    };
+
+    $$('criptomoneda').addEventListener('change', calcularMontoCompra);
+    $$('cantidad-compra').addEventListener('change', calcularMontoCompra);
 
     $$('btn-transaccion-compra').addEventListener('click', async (event) => {
         event.preventDefault();
+        const fechaActual = new Date()
+        const fechaLocal = new Date(fechaActual.getTime() - fechaActual.getTimezoneOffset() * 60000)
+            .toISOString()
+            .replace('Z', '');
+
 
         const cantidad = parseFloat($$('cantidad').value);
         const moneda = $$('criptomoneda').value;
@@ -40,7 +67,7 @@ function generarUnaTransaccion() {
         }
 
         try {
-            const res = await fetchCreateTransaction({ cantidad, moneda, fecha: fechaActual, userId: 1 });
+            const res = await fetchCreateTransaction({ cantidad, moneda, fecha: fechaLocal, userId: 1 });
 
             Toastify({
                 text: "Transacción de compra realizada con éxito",

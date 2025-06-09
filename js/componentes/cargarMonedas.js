@@ -4,7 +4,7 @@ const $$ = el => document.getElementById(el);
 
 //  Función para cargar las monedas en el select de compra y venta
 async function cargarMonedas() {
-    const data = await fetchMonedas();
+    const data = await fetchMonedas();    
     if (data === null) return;
     for (const moneda of data) {
         const option = document.createElement('option');

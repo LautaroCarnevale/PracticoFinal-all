@@ -15,7 +15,7 @@ async function cargarMyTransactions() {
         return;
     }
     for (const transaccion of data) {
-        transaccion.fecha = new Date(transaccion.fecha).toLocaleString("es-ES")
+        transaccion.fecha = new Date(transaccion.fecha).toLocaleString('es-ES');
 
         const estado = transaccion.cantidad > 0 ? "Compra" : "Venta";
 

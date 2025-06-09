@@ -1,5 +1,6 @@
 import { fetchGryptos, fetchCreateUser, fetchGetCryptosPrice } from './fetchs.js';
 import { crearFila } from './componentes/crearFila.js';
+import { formatearPrecioEnPesos } from './componentes/formatearPrice.js';
 
 const $$ = el => document.getElementById(el);
 
@@ -15,29 +16,29 @@ async function cargarMyCryptos() {
         $$('tbody-portafolio').appendChild(fila);
         return;
     }
-
+    let totalPesos = 0;
     for (const transaccion of data) {
-        let totalEnPesos;
+        let totalEnPesos = 0;
+     
         if (transaccion.totalCrypto > 0) {
             const precioActual = await fetchGetCryptosPrice(transaccion.abreviatura);
-            totalEnPesos = precioActual ? (precioActual * transaccion.totalCrypto).toFixed(2) : 0;
+            totalEnPesos = precioActual ? precioActual * transaccion.totalCrypto : 0;
         }
 
         const totalCryptoFormateado = transaccion.totalCrypto.toLocaleString('es-AR');
-        const totalPesosFormateado = totalEnPesos
-            ? Number(totalEnPesos).toLocaleString('es-AR', {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2,
-            })
-            : '0,00';
+        const totalPesosFormateado = formatearPrecioEnPesos(totalEnPesos);
 
         const tr = crearFila([
             transaccion.nombre,
             totalCryptoFormateado,
             `$${totalPesosFormateado}`,
         ]);
+           totalPesos += totalEnPesos;
         $$('tbody-portafolio').appendChild(tr);
     }
+    console.log(`Total en pesos: $${formatearPrecioEnPesos(totalPesos)}`);
+    $$('total-valor').textContent = ` $${formatearPrecioEnPesos(totalPesos)}`;
+    
 }
 
 // Función para crear un modal de registro de usuario

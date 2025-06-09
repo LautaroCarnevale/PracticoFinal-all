@@ -109,7 +109,8 @@ async function fetchCreateTransaction(transaction) {
         UserId: transaction.userId,
         Fecha: transaction.fecha
     };
-
+   
+    
     try {
         const response = await fetch("http://localhost:5119/api/transactions/CreateTransaction", {
             method: "POST",

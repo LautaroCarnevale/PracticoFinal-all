@@ -1,22 +1,50 @@
 import { cargarMonedas } from "./componentes/cargarMonedas.js";
-import { fetchCreateTransaction } from "./fetchs.js";
+import { formatearPrecioEnPesos } from "./componentes/formatearPrice.js";
+import { fetchCreateTransaction, fetchGetCryptosPrice, fetchMonedas } from "./fetchs.js";
 
 const $$ = el => document.getElementById(el);
 
 
 // generar una transacción de venta
-function generarUnaTransaccion() {
-    const fechaActual = new Date();
+async function generarUnaTransaccion() {
+    const monedas = await fetchMonedas();
+
+    const calcularMontoVenta = async () => {
+        const moneda = $$('criptomoneda').value;
+        const cantidad = parseFloat($$('cantidad-venta').value);
+
+        if (!moneda || isNaN(cantidad)) {
+            $$('monto-venta').textContent = '0.00000000';
+            return;
+        }
+
+        $$('modal-estimacion').classList.remove('hidden');
+
+        const monedaData = monedas.find(m => m.id == moneda);
+        if (!monedaData) return;
+
+        const priceMonedaSelected = await fetchGetCryptosPrice(monedaData.abreviatura);
+        const monto = cantidad * priceMonedaSelected;
+
+        $$('monto-venta').textContent = formatearPrecioEnPesos(monto);
+    };
+
+    $$('criptomoneda').addEventListener('change', calcularMontoVenta);
+    $$('cantidad-venta').addEventListener('change', calcularMontoVenta);
 
     $$('btn-transaccion-venta').addEventListener('click', async (event) => {
         event.preventDefault();
-
+        const fechaActual = new Date()
+        const fechaLocal = new Date(fechaActual.getTime() - fechaActual.getTimezoneOffset() * 60000)
+            .toISOString()
+            .replace('Z', '');
         const cantidadVenta = parseFloat($$('cantidad-venta').value);
         const moneda = $$('criptomoneda').value;
 
-        if (isNaN(cantidadVenta)) {
+
+        if (!moneda) {
             Toastify({
-                text: "Por favor, ingresa una cantidad válida.",
+                text: "Por favor, selecciona una criptomoneda.",
                 duration: 3000,
                 gravity: "top",
                 position: "right",
@@ -27,9 +55,9 @@ function generarUnaTransaccion() {
             return;
         }
 
-        if (!moneda) {
+        if (isNaN(cantidadVenta)) {
             Toastify({
-                text: "Por favor, selecciona una criptomoneda.",
+                text: "Por favor, ingresa una cantidad válida.",
                 duration: 3000,
                 gravity: "top",
                 position: "right",
