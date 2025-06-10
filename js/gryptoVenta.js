@@ -8,6 +8,8 @@ const $$ = el => document.getElementById(el);
 // generar una transacción de venta
 async function generarUnaTransaccion() {
     const monedas = await fetchMonedas();
+    const user = JSON.parse(localStorage.getItem('user'));
+
 
     const calcularMontoVenta = async () => {
         const moneda = $$('criptomoneda').value;
@@ -55,7 +57,7 @@ async function generarUnaTransaccion() {
             return;
         }
 
-        if (isNaN(cantidadVenta)) {
+        if (isNaN(cantidadVenta) && cantidadVenta > 0) {
             Toastify({
                 text: "Por favor, ingresa una cantidad válida.",
                 duration: 3000,
@@ -69,34 +71,39 @@ async function generarUnaTransaccion() {
         }
 
         try {
-            swal({
+            const willDelete = await swal({
                 title: " ¿Estás seguro de que quieres vender?",
                 text: `Esta acción no se puede deshacer.`,
                 icon: "warning",
                 buttons: true,
                 dangerMode: true,
-            })
-                .then(async (willDelete) => {
-                    if (willDelete) {
-                        const res = await fetchCreateTransaction({ cantidad: -cantidadVenta, moneda, fecha: fechaActual, userId: 1 });
-                        Toastify({
-                            text: "Transacción de venta realizada con éxito",
-                            duration: 3000,
-                            gravity: "top",
-                            position: "right",
-                            style: {
-                                background: "#4CAF50",
-                            }
-                        }).showToast();
-                    } else {
-                        swal("Tu transacción ha sido cancelada");
-                    }
+            });
+
+            if (willDelete) {
+                const res = await fetchCreateTransaction({
+                    cantidad: -cantidadVenta,
+                    moneda,
+                    fecha: fechaLocal,
+                    userId: user.id
                 });
 
 
+                Toastify({
+                    text: "Transacción de venta realizada con éxito",
+                    duration: 3000,
+                    gravity: "top",
+                    position: "right",
+                    style: {
+                        background: "#4CAF50",
+                    }
+                }).showToast();
+            } else {
+                swal("Tu transacción ha sido cancelada");
+            }
+
         } catch (error) {
             Toastify({
-                text: error.message,
+                text: error.message || "Ocurrió un error",
                 duration: 3000,
                 gravity: "top",
                 position: "right",
@@ -106,7 +113,6 @@ async function generarUnaTransaccion() {
             }).showToast();
         }
     });
-
 }
 
 cargarMonedas();

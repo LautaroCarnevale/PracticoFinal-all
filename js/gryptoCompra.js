@@ -43,7 +43,7 @@ async function generarUnaTransaccion() {
         const cantidad = parseFloat($$('cantidad-compra').value);
         const moneda = $$('criptomoneda').value;
 
-        if (isNaN(cantidad) || cantidad <= 0) {
+        if (isNaN(cantidad) && cantidad > 0) {
             Toastify({
                 text: "Por favor, ingresa una cantidad válida.",
                 duration: 3000,
@@ -69,7 +69,7 @@ async function generarUnaTransaccion() {
             return;
         }
 
-        try {
+        try {            
             const res = await fetchCreateTransaction({ cantidad, moneda, fecha: fechaLocal, userId: user.id });
 
             Toastify({

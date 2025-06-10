@@ -124,12 +124,11 @@ async function fetchCreateUser(user) {
 async function fetchCreateTransaction(transaction) {
 
     const transactionModel = {
-        Cantidad: transaction.cantidad,
+        Cantidad: parseFloat(transaction.cantidad),
         MonedaId: parseInt(transaction.moneda),
         UserId: transaction.userId,
         Fecha: transaction.fecha
-    };
-
+    };    
 
     try {
         const response = await fetch("http://localhost:5119/api/transactions/CreateTransaction", {

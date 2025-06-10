@@ -4,7 +4,8 @@ const $$ = el => document.getElementById(el);
 
 async function cargarMyTransactions() {
     const data = await fetchTransactions();
-    if (data === null) {
+    
+    if (data === null || data.length === 0) {
         const fila = document.createElement('tr');
         const td = document.createElement('td');
         td.textContent = "No se encontraron transacciones.";
