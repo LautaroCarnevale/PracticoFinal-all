@@ -9,10 +9,10 @@ async function generarUnaTransaccion() {
     const monedas = await fetchMonedas();
     const user = JSON.parse(localStorage.getItem('user'));
 
+
     const calcularMontoCompra = async () => {
         const moneda = $$('criptomoneda').value;
         const cantidad = parseFloat($$('cantidad-compra').value);
-
         if (!moneda || isNaN(cantidad)) {
             $$('monto-compra').textContent = '0.00000000';
             return;
@@ -68,9 +68,13 @@ async function generarUnaTransaccion() {
             }).showToast();
             return;
         }
-
+        const monedaData = monedas.find(m => m.id == moneda);
+        if (!monedaData) return;
+        const priceMonedaSelected = await fetchGetCryptosPrice(monedaData.abreviatura);
+        const precio = cantidad * priceMonedaSelected;
+        if (!precio) return;
         try {
-            const res = await fetchCreateTransaction({ cantidad, moneda, fecha: fechaLocal, userId: user.id });
+            const res = await fetchCreateTransaction({ cantidad, moneda, precio, fecha: fechaLocal, userId: user.id });
 
             Toastify({
                 text: "Transacción de compra realizada con éxito",

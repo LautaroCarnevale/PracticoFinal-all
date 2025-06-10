@@ -80,10 +80,17 @@ async function generarUnaTransaccion() {
             });
 
             if (willDelete) {
+                const monedaData = monedas.find(m => m.id == moneda);
+                if (!monedaData) return;
+                const priceMonedaSelected = await fetchGetCryptosPrice(monedaData.abreviatura);
+                const precio = cantidadVenta * priceMonedaSelected;
+                if (!precio) return;
+
                 const res = await fetchCreateTransaction({
                     cantidad: -cantidadVenta,
                     moneda,
                     fecha: fechaLocal,
+                    precio: precio,
                     userId: user.id
                 });
 

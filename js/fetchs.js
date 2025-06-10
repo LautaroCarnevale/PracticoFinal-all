@@ -1,3 +1,5 @@
+import { cargarInfoUser } from "./header.js";
+
 // Función para obtener las transacciones
 async function fetchGryptos() {
     try {
@@ -96,7 +98,7 @@ async function fetchCreateUser(user) {
         Nombre: user.nombre,
         Apellido: user.apellido,
         Email: user.email,
-        Saldo: user.saldo
+        Saldo: 1000000000
     };
 
     try {
@@ -126,10 +128,11 @@ async function fetchCreateTransaction(transaction) {
     const transactionModel = {
         Cantidad: parseFloat(transaction.cantidad),
         MonedaId: parseInt(transaction.moneda),
+        precio: parseFloat(transaction.precio),
         UserId: transaction.userId,
         Fecha: transaction.fecha
-    };    
-
+    };
+    
     try {
         const response = await fetch("http://localhost:5119/api/transactions/CreateTransaction", {
             method: "POST",
@@ -144,6 +147,7 @@ async function fetchCreateTransaction(transaction) {
             throw new Error(errorMessage);
         }
         const data = await response.json();
+        cargarInfoUser();
         return data;
     } catch (error) {
         console.error("Error:", error);

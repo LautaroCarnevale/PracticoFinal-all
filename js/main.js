@@ -69,7 +69,6 @@ function modalCrearUsuario() {
 
         try {
             const data = await fetchCreateUser(user);
-
             if (data === null) {
                 Toastify({
                     text: "Error al crear el usuario. Por favor, inténtalo de nuevo.",
@@ -81,16 +80,41 @@ function modalCrearUsuario() {
                     }
                 }).showToast();
             }
+            if (data.type == "error-email") {
+                swal({
+                    title: "Usario ya registrado",
+                    text: `El usuario ${data.user.email} ya se encuentra registrado. ¿Deseas iniciar sesión con ese usuario?`,
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                    .then(async (willDelete) => {
+                        if (willDelete) {
+                            localStorage.setItem('user', JSON.stringify({
+                                id: data.user.id,
+                                nombre: data.user.nombre,
+                                apellido: data.user.apellido,
+                                email: data.user.email,
+                            }));
+                            $$('modal').classList.add('hidden');
+                            $$('modal-registro').classList.add('hidden');
+                        } else {
+                            throw new Error("El usuario ya se encuentra registrado.");
+                        }
+                    });
+            }
 
-            localStorage.setItem('user', JSON.stringify({
-                id: data.id,
-                nombre: data.nombre,
-                apellido: data.apellido,
-                email: data.email,
-            }));
+            if (data.type == "success") {
+                localStorage.setItem('user', JSON.stringify({
+                    id: data.user.id,
+                    nombre: data.user.nombre,
+                    apellido: data.user.apellido,
+                    email: data.user.email,
+                }));
+                $$('modal').classList.add('hidden');
+                $$('modal-registro').classList.add('hidden');
+            }
 
-            $$('modal').classList.add('hidden');
-            $$('modal-registro').classList.add('hidden');
         } catch (error) {
             $$(error.type).textContent = error.message;
 
@@ -112,15 +136,6 @@ function modalCrearUsuario() {
     }
 }
 
-async function cargarSaldoUser() {
-    const userLocal = JSON.parse(localStorage.getItem('user'));
-    if(!userLocal) return
-    const user = await fetchSaldoUser(userLocal.id);
-    $$('total-saldo').textContent = `$${formatearPrecioEnPesos(user.saldo)}`;
 
-}
-
-
-cargarSaldoUser()
 modalCrearUsuario();
 cargarMyCryptos();
