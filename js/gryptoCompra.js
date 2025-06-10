@@ -7,6 +7,7 @@ const $$ = el => document.getElementById(el);
 // generar una transacción de compra o venta
 async function generarUnaTransaccion() {
     const monedas = await fetchMonedas();
+    const user = JSON.parse(localStorage.getItem('user'));
 
     const calcularMontoCompra = async () => {
         const moneda = $$('criptomoneda').value;
@@ -29,7 +30,7 @@ async function generarUnaTransaccion() {
     };
 
     $$('criptomoneda').addEventListener('change', calcularMontoCompra);
-    $$('cantidad-compra').addEventListener('change', calcularMontoCompra);
+    $$('cantidad-compra').addEventListener('input', calcularMontoCompra);
 
     $$('btn-transaccion-compra').addEventListener('click', async (event) => {
         event.preventDefault();
@@ -69,7 +70,7 @@ async function generarUnaTransaccion() {
         }
 
         try {
-            const res = await fetchCreateTransaction({ cantidad, moneda, fecha: fechaLocal, userId: 1 });
+            const res = await fetchCreateTransaction({ cantidad, moneda, fecha: fechaLocal, userId: user.id });
 
             Toastify({
                 text: "Transacción de compra realizada con éxito",

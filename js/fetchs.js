@@ -16,6 +16,7 @@ async function fetchGryptos() {
     }
 }
 
+// Función para obtener el precio de una criptomoneda
 async function fetchGetCryptosPrice(abreviatura) {
     try {
         const url = `https://criptoya.com/api/binance/${abreviatura}/ARS/1`;
@@ -70,13 +71,32 @@ async function fetchMonedas() {
     }
 }
 
+
+// Función para obtener el saldo
+async function fetchSaldoUser(id) {
+    try {
+        const response = await fetch(`http://localhost:5119/api/users/VerifyUser/${id}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            }
+        });
+
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Fetch error:', error);
+        return null;
+    }
+}
+
 // Función para crear un usuario
 async function fetchCreateUser(user) {
     const userEnviar = {
         Nombre: user.nombre,
         Apellido: user.apellido,
         Email: user.email,
-        Saldo: 1000000
+        Saldo: user.saldo
     };
 
     try {
@@ -89,9 +109,9 @@ async function fetchCreateUser(user) {
         });
 
         if (!response.ok) {
-            throw new Error("Error al guardar el usuario");
+            const errorJson = await response.json();
+            throw errorJson;
         }
-
         const data = await response.json();
         return data;
     } catch (error) {
@@ -109,8 +129,8 @@ async function fetchCreateTransaction(transaction) {
         UserId: transaction.userId,
         Fecha: transaction.fecha
     };
-   
-    
+
+
     try {
         const response = await fetch("http://localhost:5119/api/transactions/CreateTransaction", {
             method: "POST",
@@ -120,7 +140,7 @@ async function fetchCreateTransaction(transaction) {
             body: JSON.stringify(transactionModel)
         });
 
-       if (!response.ok) {
+        if (!response.ok) {
             const errorMessage = await response.text();
             throw new Error(errorMessage);
         }
@@ -153,4 +173,4 @@ async function fetchVerifyUser(user) {
     }
 }
 
-export { fetchGryptos, fetchTransactions, fetchMonedas, fetchCreateUser, fetchVerifyUser, fetchCreateTransaction, fetchGetCryptosPrice };
+export { fetchSaldoUser, fetchGryptos, fetchTransactions, fetchMonedas, fetchCreateUser, fetchVerifyUser, fetchCreateTransaction, fetchGetCryptosPrice };

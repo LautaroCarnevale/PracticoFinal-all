@@ -30,7 +30,7 @@ async function generarUnaTransaccion() {
     };
 
     $$('criptomoneda').addEventListener('change', calcularMontoVenta);
-    $$('cantidad-venta').addEventListener('change', calcularMontoVenta);
+    $$('cantidad-venta').addEventListener('input', calcularMontoVenta);
 
     $$('btn-transaccion-venta').addEventListener('click', async (event) => {
         event.preventDefault();
