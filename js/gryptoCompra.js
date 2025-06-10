@@ -69,7 +69,7 @@ async function generarUnaTransaccion() {
             return;
         }
 
-        try {            
+        try {
             const res = await fetchCreateTransaction({ cantidad, moneda, fecha: fechaLocal, userId: user.id });
 
             Toastify({

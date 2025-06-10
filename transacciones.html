@@ -7,6 +7,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
         rel="stylesheet">
+            <link rel="stylesheet" href="css/styles.css" />
     <title>Transacciones - CryptoTracker</title>
     <!-- toast -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
@@ -18,7 +19,7 @@
 
 <body class="min-h-screen grid grid-rows-[auto_1fr_auto]">
     <header class="p-4 border-b border-gray-300 flex justify-center">
-        <div class="flex justify-between w-8/9">
+        <div class="flex justify-between w-9/10">
             <div>
                 <a href="/">
                     <p class="text-xl font-semibold">CryptoTracker</p>
@@ -31,12 +32,17 @@
                     <li><a href="/vender.html">Vender</a></li>
                     <li class="font-semibold"><a href="/transacciones.html">Transacciones</a></li>
                 </ul>
-                  <div id="logout" class="flex items-center p-2 bg-black rounded-md cursor-pointer">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24">
-                        <path fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4m7 14l5-5l-5-5m5 5H9" />
-                    </svg>
-                </div>
+                   <section id="logout" class="flex gap-[10px] p-1.5 items-end bg-[#c4c4c442] cursor-pointer rounded-[10px] space-y-0 ursor-pointer">
+                    <div class="flex flex-col items-end ">
+                        <p id="nombreCompleto" class="text-base">Lautaro Carnevale </p>
+                        <p id="total-saldo" class="text-xs font-semibold"></p>
+                    </div>
+                    <div class="overflow-hidden w-10 h-10 rounded-md">
+                        <img class="w-full h-full rounded-md object-cover aspect-square scale-140"
+                            src="https://img.freepik.com/vector-gratis/perfil-avatar-hombre-icono-redondo_24640-14044.jpg?w=2000"
+                            alt="avatar user" />
+                    </div>
+                </section>
             </nav>
         </div>
     </header>

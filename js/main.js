@@ -114,9 +114,8 @@ function modalCrearUsuario() {
 
 async function cargarSaldoUser() {
     const userLocal = JSON.parse(localStorage.getItem('user'));
-
+    if(!userLocal) return
     const user = await fetchSaldoUser(userLocal.id);
-
     $$('total-saldo').textContent = `$${formatearPrecioEnPesos(user.saldo)}`;
 
 }
