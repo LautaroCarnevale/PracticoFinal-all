@@ -1,10 +1,12 @@
 import { cargarMonedas } from "./componentes/cargarMonedas.js";
-import { fetchCreateTransaction } from "./fetchs.js";
+import { formatearPrecioEnPesos } from "./componentes/formatearPrice.js";
+import { fetchCreateTransaction, fetchGetCryptosPrice, fetchMonedas } from "./fetchs.js";
 
 const $$ = el => document.getElementById(el);
 
 // generar una transacción de compra o venta
-function generarUnaTransaccion() {
+async function generarUnaTransaccion() {
+    const monedas = await fetchMonedas();
 
     const calcularMontoCompra = async () => {
         const moneda = $$('criptomoneda').value;
@@ -37,7 +39,7 @@ function generarUnaTransaccion() {
             .replace('Z', '');
 
 
-        const cantidad = parseFloat($$('cantidad').value);
+        const cantidad = parseFloat($$('cantidad-compra').value);
         const moneda = $$('criptomoneda').value;
 
         if (isNaN(cantidad) || cantidad <= 0) {

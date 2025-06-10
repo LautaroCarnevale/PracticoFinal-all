@@ -4,6 +4,8 @@ import { formatearPrecioEnPesos } from './componentes/formatearPrice.js';
 
 const $$ = el => document.getElementById(el);
 
+
+// Función para cargar las criptomonedas del portafolio del usuario
 async function cargarMyCryptos() {
     const data = await fetchGryptos();
     if (data === null) {
@@ -19,26 +21,23 @@ async function cargarMyCryptos() {
     let totalPesos = 0;
     for (const transaccion of data) {
         let totalEnPesos = 0;
-     
+
         if (transaccion.totalCrypto > 0) {
             const precioActual = await fetchGetCryptosPrice(transaccion.abreviatura);
             totalEnPesos = precioActual ? precioActual * transaccion.totalCrypto : 0;
         }
-
-        const totalCryptoFormateado = transaccion.totalCrypto.toLocaleString('es-AR');
         const totalPesosFormateado = formatearPrecioEnPesos(totalEnPesos);
 
         const tr = crearFila([
             transaccion.nombre,
-            totalCryptoFormateado,
+            transaccion.totalCrypto,
             `$${totalPesosFormateado}`,
         ]);
-           totalPesos += totalEnPesos;
+        totalPesos += totalEnPesos;
         $$('tbody-portafolio').appendChild(tr);
     }
-    console.log(`Total en pesos: $${formatearPrecioEnPesos(totalPesos)}`);
+
     $$('total-valor').textContent = ` $${formatearPrecioEnPesos(totalPesos)}`;
-    
 }
 
 // Función para crear un modal de registro de usuario
