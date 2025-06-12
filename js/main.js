@@ -1,13 +1,12 @@
-import { fetchGryptos, fetchCreateUser, fetchGetCryptosPrice, fetchSaldoUser } from './fetchs.js';
+import { fetchGryptos, fetchCreateUser, fetchGetCryptosPrice } from './fetchs.js';
 import { crearFila } from './componentes/crearFila.js';
 import { formatearPrecioEnPesos } from './componentes/formatearPrice.js';
 
 const $$ = el => document.getElementById(el);
 
-
 // Función para cargar las criptomonedas del portafolio del usuario
 async function cargarMyCryptos() {
-    const data = await fetchGryptos();
+    const data = await fetchGryptos();    
     if (data === null || data.length === 0) {
         const fila = document.createElement('tr');
         const td = document.createElement('td');
@@ -40,7 +39,7 @@ async function cargarMyCryptos() {
     $$('total-valor').textContent = ` $${formatearPrecioEnPesos(totalPesos)}`;
 }
 
-// Función para crear un modal de registro de usuario
+// Función para administrar un modal de registro de usuario
 function modalCrearUsuario() {
     const userLocal = localStorage.getItem('user');
 
@@ -98,23 +97,21 @@ function modalCrearUsuario() {
                             }));
                             $$('modal').classList.add('hidden');
                             $$('modal-registro').classList.add('hidden');
-                        } else {
-                            throw new Error("El usuario ya se encuentra registrado.");
+                            cargarInfoUser();
+                            return;
                         }
                     });
             }
+            localStorage.setItem('user', JSON.stringify({
+                id: data.user.id,
+                nombre: data.user.nombre,
+                apellido: data.user.apellido,
+                email: data.user.email,
+            }));
+            $$('modal').classList.add('hidden');
+            $$('modal-registro').classList.add('hidden');
 
-            if (data.type == "success") {
-                localStorage.setItem('user', JSON.stringify({
-                    id: data.user.id,
-                    nombre: data.user.nombre,
-                    apellido: data.user.apellido,
-                    email: data.user.email,
-                }));
-                $$('modal').classList.add('hidden');
-                $$('modal-registro').classList.add('hidden');
-            }
-
+            cargarInfoUser();
         } catch (error) {
             $$(error.type).textContent = error.message;
 

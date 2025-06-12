@@ -1,4 +1,5 @@
-import { cargarInfoUser } from "./header.js";
+import { cargarInfoUser } from "./componentes/cargarInfoUsuario.js";
+
 
 // Función para obtener las transacciones
 async function fetchGryptos() {
@@ -75,7 +76,7 @@ async function fetchMonedas() {
 
 
 // Función para obtener el saldo
-async function fetchSaldoUser(id) {
+async function fetchGetUser(id) {
     try {
         const response = await fetch(`http://localhost:5119/api/users/VerifyUser/${id}`, {
             method: "GET",
@@ -83,6 +84,11 @@ async function fetchSaldoUser(id) {
                 "Content-Type": "application/json",
             }
         });
+
+        if (!response.ok) {
+            const errorJson = await response.json();
+            throw errorJson;
+        }
 
         const data = await response.json();
         return data;
@@ -132,7 +138,7 @@ async function fetchCreateTransaction(transaction) {
         UserId: transaction.userId,
         Fecha: transaction.fecha
     };
-    
+
     try {
         const response = await fetch("http://localhost:5119/api/transactions/CreateTransaction", {
             method: "POST",
@@ -155,25 +161,5 @@ async function fetchCreateTransaction(transaction) {
     }
 }
 
-// Función para verificar un usuario
-async function fetchVerifyUser(user) {
-    try {
-        const response = await fetch("http://localhost:5119/api/users/VerifyUser", {
-            method: "Post",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(user)
-        });
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        // Assuming the response is JSON
-        return response.status === 200;
-    } catch (error) {
-        console.error('Fetch error:', error);
-        return null;
-    }
-}
 
-export { fetchSaldoUser, fetchGryptos, fetchTransactions, fetchMonedas, fetchCreateUser, fetchVerifyUser, fetchCreateTransaction, fetchGetCryptosPrice };
+export { fetchGetUser, fetchGryptos, fetchTransactions, fetchMonedas, fetchCreateUser, fetchCreateTransaction, fetchGetCryptosPrice };

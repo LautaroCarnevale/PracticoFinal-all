@@ -1,5 +1,4 @@
-import { formatearPrecioEnPesos } from "./componentes/formatearPrice.js";
-import { fetchSaldoUser } from "./fetchs.js";
+import { cargarInfoUser } from "./componentes/cargarInfoUsuario.js";
 
 const $$ = el => document.getElementById(el);
 
@@ -24,15 +23,4 @@ $$('logout').addEventListener('click', (event) => {
         });
 });
 
-async function cargarInfoUser() {
-    const userLocal = JSON.parse(localStorage.getItem('user'));
-    if (!userLocal) return
-    const user = await fetchSaldoUser(userLocal.id);
-    $$('total-saldo').textContent = `$${formatearPrecioEnPesos(user.saldo)}`;
-    $$('nombreCompleto').textContent = `${userLocal.nombre} ${userLocal.apellido}`
-}
-
-
-cargarInfoUser()
-
-export { cargarInfoUser }
+cargarInfoUser();

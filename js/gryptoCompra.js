@@ -74,8 +74,14 @@ async function generarUnaTransaccion() {
         const precio = cantidad * priceMonedaSelected;
         if (!precio) return;
         try {
-            const res = await fetchCreateTransaction({ cantidad, moneda, precio, fecha: fechaLocal, userId: user.id });
-
+            const res = await fetchCreateTransaction({
+                cantidad,
+                moneda,
+               precio,
+                fecha:fechaLocal,
+                userId:user.id
+            });
+            cargarMonedas();
             Toastify({
                 text: "Transacción de compra realizada con éxito",
                 duration: 3000,

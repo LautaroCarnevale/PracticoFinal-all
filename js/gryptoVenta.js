@@ -90,11 +90,11 @@ async function generarUnaTransaccion() {
                     cantidad: -cantidadVenta,
                     moneda,
                     fecha: fechaLocal,
-                    precio: precio,
+                    precio: -precio,
                     userId: user.id
                 });
 
-
+                cargarMonedas();
                 Toastify({
                     text: "Transacción de venta realizada con éxito",
                     duration: 3000,
