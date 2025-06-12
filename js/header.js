@@ -2,6 +2,7 @@ import { cargarInfoUser } from "./componentes/cargarInfoUsuario.js";
 
 const $$ = el => document.getElementById(el);
 
+// Evento para cerrar sesión
 $$('logout').addEventListener('click', (event) => {
     event.preventDefault();
     swal({

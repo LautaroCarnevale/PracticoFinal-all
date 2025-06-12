@@ -1,12 +1,14 @@
 import { fetchGryptos, fetchCreateUser, fetchGetCryptosPrice } from './fetchs.js';
 import { crearFila } from './componentes/crearFila.js';
 import { formatearPrecioEnPesos } from './componentes/formatearPrice.js';
+import { typeToast } from './componentes/Toast.js';
+import { cargarInfoUser } from './componentes/cargarInfoUsuario.js';
 
 const $$ = el => document.getElementById(el);
 
 // Función para cargar las criptomonedas del portafolio del usuario
 async function cargarMyCryptos() {
-    const data = await fetchGryptos();    
+    const data = await fetchGryptos();
     if (data === null || data.length === 0) {
         const fila = document.createElement('tr');
         const td = document.createElement('td');
@@ -43,9 +45,10 @@ async function cargarMyCryptos() {
 function modalCrearUsuario() {
     const userLocal = localStorage.getItem('user');
 
-
+    // evento para cerrar el modal de registro y crear un nuevo usuario
     $$('btn-registrarse').addEventListener('click', async (event) => {
         event.preventDefault();
+
         $$('error-nombre').textContent = '';
         $$('error-apellido').textContent = '';
         $$('error-email').textContent = '';
@@ -54,10 +57,10 @@ function modalCrearUsuario() {
         const apellido = $$('apellido').value.trim();
         const email = $$('email').value.trim();
 
+        //validaciones
         if (!nombre) return $$('error-nombre').textContent = 'Por favor, ingresa tu nombre.';
         if (!apellido) return $$('error-apellido').textContent = 'Por favor, ingresa tu apellido.';
         if (!email) return $$('error-email').textContent = 'Por favor, ingresa tu email.';
-
 
         // Validación simple de email
         if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
@@ -68,17 +71,10 @@ function modalCrearUsuario() {
 
         try {
             const data = await fetchCreateUser(user);
-            if (data === null) {
-                Toastify({
-                    text: "Error al crear el usuario. Por favor, inténtalo de nuevo.",
-                    duration: 3000,
-                    gravity: "top",
-                    position: "right",
-                    style: {
-                        background: "#FF0000",
-                    }
-                }).showToast();
-            }
+
+            if (data === null) return typeToast('#FF0000', 'Error al crear el usuario. Por favor, inténtalo de nuevo.');
+
+            // Si el usuario ya se encuentra registrado
             if (data.type == "error-email") {
                 swal({
                     title: "Usario ya registrado",
@@ -88,6 +84,8 @@ function modalCrearUsuario() {
                     dangerMode: true,
                 })
                     .then(async (willDelete) => {
+
+                        // Si el usuario desea iniciar sesión con el usuario ya registrado
                         if (willDelete) {
                             localStorage.setItem('user', JSON.stringify({
                                 id: data.user.id,
@@ -114,16 +112,7 @@ function modalCrearUsuario() {
             cargarInfoUser();
         } catch (error) {
             $$(error.type).textContent = error.message;
-
-            Toastify({
-                text: error.message,
-                duration: 3000,
-                gravity: "top",
-                position: "right",
-                style: {
-                    background: "#FF0000",
-                }
-            }).showToast();
+            typeToast('#FF0000', error.message);
         }
     });
 
