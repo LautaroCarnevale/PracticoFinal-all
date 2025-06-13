@@ -75,7 +75,7 @@ async function fetchMonedas() {
 }
 
 
-// Función para obtener el saldo
+// Función para obtener el usuario
 async function fetchGetUser(id) {
     try {
         const response = await fetch(`http://localhost:5119/api/users/VerifyUser/${id}`, {
@@ -97,6 +97,32 @@ async function fetchGetUser(id) {
         return null;
     }
 }
+
+
+// Función para obtener una transacción
+async function fetchGetTransaction(id) {
+    try {
+        const response = await fetch(`http://localhost:5119/api/transactions/GetTransactionById/${id}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            }
+        });
+
+         if (!response.ok) {
+            // Mostrar el contenido del error devuelto por el backend
+            const errorText = await response.text();
+            console.error(`Error ${response.status}:`, errorText);
+            return null;
+        }
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Fetch error:', error);
+        return null;
+    }
+}
+
 
 // Función para crear un usuario
 async function fetchCreateUser(user) {
@@ -162,4 +188,4 @@ async function fetchCreateTransaction(transaction) {
 }
 
 
-export { fetchGetUser, fetchGryptos, fetchTransactions, fetchMonedas, fetchCreateUser, fetchCreateTransaction, fetchGetCryptosPrice };
+export { fetchGetTransaction, fetchGetUser, fetchGryptos, fetchTransactions, fetchMonedas, fetchCreateUser, fetchCreateTransaction, fetchGetCryptosPrice };

@@ -7,7 +7,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
         rel="stylesheet">
-            <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/styles.css" />
     <title>Transacciones - CryptoTracker</title>
     <!-- toast -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
@@ -32,7 +32,8 @@
                     <li><a href="/vender.html">Vender</a></li>
                     <li class="font-semibold"><a href="/transacciones.html">Transacciones</a></li>
                 </ul>
-                   <section id="logout" class="flex gap-[10px] p-1.5 items-end bg-[#c4c4c442] cursor-pointer rounded-[10px] space-y-0 ursor-pointer">
+                <section id="logout"
+                    class="flex gap-[10px] p-1.5 items-end bg-[#c4c4c442] cursor-pointer rounded-[10px] space-y-0 ursor-pointer">
                     <div class="flex flex-col items-end ">
                         <p id="nombreCompleto" class="text-base"></p>
                         <p id="total-saldo" class="text-xs font-semibold"></p>
@@ -62,10 +63,30 @@
                             <th class="font-normal">Cantidad</th>
                             <th class="font-normal">Estado</th>
                             <th class="font-normal">Fecha</th>
+                            <th class="font-normal">Acciones</th>
                         </tr>
                     </thead>
                     <tbody id="tbody-transacciones"></tbody>
                 </table>
+            </div>
+        </section>
+        <section class="fixed top-0 left-0 w-full h-full bg-black/50 hidden" id="modal-info">
+            <div class="w-96 h-fit absolute top-1/5 left-1/3 border bg-white rounded border-none ">
+                <div class="flex justify-between items-center border-b border-gray-300 py-2 px-2">
+                    <p>Detalle de Transacción</p>
+                    <div id="cerrar-modal-info" class="mr-3 cursor-pointer p-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24">
+                            <path fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" d="M18 6L6 18M6 6l12 12" />
+                        </svg>
+                    </div>
+
+
+
+                </div>
+                <div class="p-4" id="info-transaccion">
+
+                </div>
             </div>
         </section>
     </main>
@@ -73,7 +94,7 @@
         <p class="copyright">&copy; Desarrollado por Lautaro Carnevale 🚁</p>
     </footer>
     <script type="module" src="/js/transacciones.js"></script>
-        <script type="module" src="/js/header.js"></script>
+    <script type="module" src="/js/header.js"></script>
 
 </body>
 
