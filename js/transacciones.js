@@ -29,11 +29,15 @@ async function cargarMyTransactions() {
         console.log(error);
     }
 }
+
+// Función para cerrar el modal
 function cerrarInfo() {
     $$('cerrar-modal-info').addEventListener('click', () => {
         $$('modal-info').classList.add('hidden');
     });
 }
+
+// Función para obtener la información de una transacción por su ID
 async function ObtenerTransaccionById() {
     try {
         document.addEventListener('click', async (e) => {
